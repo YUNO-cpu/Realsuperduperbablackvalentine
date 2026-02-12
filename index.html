@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pure Love | Valentine's Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ff85a1;
+            --bg: #fff5f6;
+            --text: #4a4a4a;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Header Section --- */
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: var(--white);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: var(--shadow);
+        }
+        header h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.5rem; 
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        header p { font-weight: 300; letter-spacing: 1px; color: var(--secondary); text-transform: uppercase; font-size: 0.8rem; }
+
+        /* --- Menu Grid --- */
+        .container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .menu-card {
+            background: var(--white);
+            padding: 25px 15px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255, 133, 161, 0.1);
+        }
+        .menu-card:active { transform: scale(0.95); }
+        .menu-card i { font-size: 1.8rem; color: var(--primary); margin-bottom: 12px; display: block; }
+        .menu-card h3 { font-size: 0.9rem; font-weight: 600; }
+
+        /* --- Game Views --- */
+        .game-view { display: none; background: var(--white); border-radius: 30px; padding: 30px 20px; box-shadow: var(--shadow); margin-top: 10px; min-height: 400px; position: relative; }
+        .active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn-back { position: absolute; top: 20px; left: 20px; color: var(--secondary); cursor: pointer; font-size: 1.2rem; }
+        
+        h2 { font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 25px; color: var(--primary); }
+
+        /* --- Custom Game Styles --- */
+        /* Memory */
+        .grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .tile { height: 70px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: transparent; transition: 0.3s; }
+        .tile.flipped { color: var(--primary); background: var(--white); border: 2px solid var(--secondary); }
+
+        /* Calculator */
+        .calc-input { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #eee; border-radius: 12px; font-family: inherit; text-align: center; outline: none; }
+        .btn-main { background: var(--primary); color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: 600; margin-top: 10px; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); }
+
+        /* Modal */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: white; padding: 40px 30px; border-radius: 30px; text-align: center; max-width: 400px; width: 100%; }
+        
+        .score-box { background: var(--bg); padding: 10px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9rem; font-weight: 600; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div id="main-menu">
+    <header>
+        <h1>Pure Love</h1>
+        <p>The Valentine's Collection</p>
+    </header>
+
+    <div class="container">
+        <div class="game-grid">
+            <div class="menu-card" onclick="openGame('memory')"><i class="fa-solid fa-heart-half-stroke"></i><h3>Санах ой</h3></div>
+            <div class="menu-card" onclick="openGame('calculator')"><i class="fa-solid fa-calculator"></i><h3>Тооцоолуур</h3></div>
+            <div class="menu-card" onclick="openGame('clicker')"><i class="fa-solid fa-hand-pointer"></i><h3>Зүрх товших</h3></div>
+            <div class="menu-card" onclick="openGame('words')"><i class="fa-solid fa-font"></i><h3>Үг таах</h3></div>
+            <div class="menu-card" onclick="openGame('tictac')"><i class="fa-solid fa-xmark"></i><h3>X & O</h3></div>
+            <div class="menu-card" onclick="openGame('arrow')"><i class="fa-solid fa-location-arrow"></i><h3>Сум харвах</h3></div>
+            <div class="menu-card" onclick="openGame('maze')"><i class="fa-solid fa-route"></i><h3>Лабиринт</h3></div>
+            <div class="menu-card" onclick="openGame('quiz')"><i class="fa-solid fa-lightbulb"></i><h3>Асуулт</h3></div>
+            <div class="menu-card" onclick="openGame('claw')"><i class="fa-solid fa-gift"></i><h3>Автомат</h3></div>
+            <div class="menu-card" onclick="openGame('dice')"><i class="fa-solid fa-dice"></i><h3>Аз сорих</h3></div>
+            <div class="menu-card" onclick="openGame('catcher')"><i class="fa-solid fa-basket-shopping"></i><h3>Бэлэг барих</h3></div>
+            <div class="menu-card" onclick="openGame('music')"><i class="fa-solid fa-music"></i><h3>Ая таах</h3></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="game-memory" class="game-view">
+        <div class="btn-back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i></div>
+        <h2>Match Hearts</h2>
+        <div class="grid-4x4" id="memory-board"></div>
+    </div>
+
+    <div id="game-calculator" class="game-view">
+        <div class="btn-back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i></div>
+        <h2>Love Sync</h2>
+        <input type="text" id="name1" class="calc-input" placeholder="Таны нэр">
+        <input type="text" id="name2" class="calc-input" placeholder="Түүний нэр">
+        <button class="btn-main" onclick="runCalc()">Шалгах</button>
+        <div id="calc-res" style="text-align:center; margin-top:20px; font-size: 2rem; color: var(--primary);"></div>
+    </div>
+
+    <div id="game-clicker" class="game-view">
+        <div class="btn-back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i></div>
+        <h2>Heart Pop</h2>
+        <div class="score-box">Оноо: <span id="click-score">0</span></div>
+        <div id="click-area" style="height:300px; background:#fffcfc; border:1px dashed var(--secondary); border-radius:20px; position:relative; overflow:hidden;"></div>
+    </div>
+
+    <div id="game-words" class="game-view"> <div class="btn-back" onclick="goHome()"> <i class="fa-solid fa-chevron-left"></i></div> <h2>Үг Таах</h2> <div id="word-display" style="font-size:2rem; text-align:center; margin:40px 0;"></div> <div id="word-kb" class="grid-4x4"></div> </div>
+    <div id="game-tictac" class="game-view">
