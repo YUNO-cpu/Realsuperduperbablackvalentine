@@ -1,0 +1,84 @@
+    :root {
+            --primary: #ff4d6d;
+            --secondary: #ff85a1;
+            --bg: #fff5f6;
+            --text: #4a4a4a;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Header Section --- */
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: var(--white);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: var(--shadow);
+        }
+        header h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.5rem; 
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        header p { font-weight: 300; letter-spacing: 1px; color: var(--secondary); text-transform: uppercase; font-size: 0.8rem; }
+
+        /* --- Menu Grid --- */
+        .container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .menu-card {
+            background: var(--white);
+            padding: 25px 15px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255, 133, 161, 0.1);
+        }
+        .menu-card:active { transform: scale(0.95); }
+        .menu-card i { font-size: 1.8rem; color: var(--primary); margin-bottom: 12px; display: block; }
+        .menu-card h3 { font-size: 0.9rem; font-weight: 600; }
+
+        /* --- Game Views --- */
+        .game-view { display: none; background: var(--white); border-radius: 30px; padding: 30px 20px; box-shadow: var(--shadow); margin-top: 10px; min-height: 400px; position: relative; }
+        .active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn-back { position: absolute; top: 20px; left: 20px; color: var(--secondary); cursor: pointer; font-size: 1.2rem; }
+        
+        h2 { font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 25px; color: var(--primary); }
+
+        /* --- Custom Game Styles --- */
+        /* Memory */
+        .grid-4x4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .tile { height: 70px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: transparent; transition: 0.3s; }
+        .tile.flipped { color: var(--primary); background: var(--white); border: 2px solid var(--secondary); }
+
+        /* Calculator */
+        .calc-input { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #eee; border-radius: 12px; font-family: inherit; text-align: center; outline: none; }
+        .btn-main { background: var(--primary); color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: 600; margin-top: 10px; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); }
+
+        /* Modal */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: white; padding: 40px 30px; border-radius: 30px; text-align: center; max-width: 400px; width: 100%; }
+        
+        .score-box { background: var(--bg); padding: 10px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9rem; font-weight: 600; text-align: center; }
