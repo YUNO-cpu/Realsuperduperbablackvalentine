@@ -6,6 +6,7 @@
     <title>Pure Love | Valentine's Collection</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     
 </head>
 <body>
@@ -24,9 +25,9 @@
             <div class="menu-card" onclick="openGame('words')"><i class="fa-solid fa-font"></i><h3>Үг таах</h3></div>
             <div class="menu-card" onclick="openGame('tictac')"><i class="fa-solid fa-xmark"></i><h3>X & O</h3></div>
             <div class="menu-card" onclick="openGame('arrow')"><i class="fa-solid fa-location-arrow"></i><h3>Сум харвах</h3></div>
-            <div class="menu-card" onclick="openGame('maze')"><i class="fa-solid fa-route"></i><h3>Лабиринт</h3></div>
+            <div class="menu-card" onclick="openGame('maze')"><i class="fa-solid fa-route"></i><h3>Төөрдөг байшин</h3></div>
             <div class="menu-card" onclick="openGame('quiz')"><i class="fa-solid fa-lightbulb"></i><h3>Асуулт</h3></div>
-            <div class="menu-card" onclick="openGame('claw')"><i class="fa-solid fa-gift"></i><h3>Автомат</h3></div>
+            <div class="menu-card" onclick="openGame('claw')"><i class="fa-solid fa-gift"></i><h3>Боркогын найзууд</h3></div>
             <div class="menu-card" onclick="openGame('dice')"><i class="fa-solid fa-dice"></i><h3>Аз сорих</h3></div>
             <div class="menu-card" onclick="openGame('catcher')"><i class="fa-solid fa-basket-shopping"></i><h3>Бэлэг барих</h3></div>
             <div class="menu-card" onclick="openGame('music')"><i class="fa-solid fa-music"></i><h3>Ая таах</h3></div>
@@ -57,5 +58,50 @@
         <div id="click-area" style="height:300px; background:#fffcfc; border:1px dashed var(--secondary); border-radius:20px; position:relative; overflow:hidden;"></div>
     </div>
 
-    <div id="game-words" class="game-view"> <div class="btn-back" onclick="goHome()"> <i class="fa-solid fa-chevron-left"></i></div> <h2>Үг Таах</h2> <div id="word-display" style="font-size:2rem; text-align:center; margin:40px 0;"></div> <div id="word-kb" class="grid-4x4"></div> </div>
+    <div id="game-words" class="game-view">
+    <div class="btn-back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i></div>
+    <h2>Үг Таах</h2>
+    <div id="word-hint" style="text-align:center; color: var(--secondary); font-style: italic; margin-bottom: 10px;"></div>
+    <div id="word-display" style="font-size:2.2rem; text-align:center; margin:20px 0; font-weight:600; letter-spacing: 5px; color: var(--primary);"></div>
+    <div id="word-kb" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; padding: 10px;">
+        </div>
+</div>
+
     <div id="game-tictac" class="game-view">
+        <div class="btn-back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i></div>
+        <h2>X & O</h2>
+        <div class="tictac-grid" id="tictac-board">
+            </div>
+        <div id="tictac-status" style="text-align:center; margin-top:20px;">Таны ээлж</div>
+    </div>
+
+    <div id="game-arrow" class="game-view">
+        <div class="btn-back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i></div>
+        <h2>Сум харвах</h2>
+        <div class="game-placeholder">Төв хэсэгт хүрэх...</div>
+    </div>
+
+    <div id="game-maze" class="game-view">
+        <div class="btn-back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i></div>
+        <h2>Төөрдөг байшин</h2>
+        <div id="maze-container"></div>
+    </div>
+
+    <div id="game-quiz" class="game-view">
+        <div class="btn-back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i></div>
+        <h2>Хайрын асуулт</h2>
+        <div id="quiz-area"></div>
+    </div>
+
+    </div> <div id="modal">
+    <div class="modal-content">
+        <h2 id="modal-title">Баяр хүргэе!</h2>
+        <p id="modal-text"></p>
+        <button class="btn-main" onclick="closeModal()">Дахиад тоглох</button>
+        <button class="btn-main" style="background:var(--secondary); margin-top:10px;" onclick="goHome(); closeModal();">Буцах</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
