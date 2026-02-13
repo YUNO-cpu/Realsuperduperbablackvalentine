@@ -59,7 +59,7 @@
 
         /* --- Game Views --- */
         .game-view { display: none; background: var(--white); border-radius: 30px; padding: 30px 20px; box-shadow: var(--shadow); margin-top: 10px; min-height: 400px; position: relative; }
-        .active { display: block; animation: fadeIn 0.5s; }
+        .game-view.active { display: block; animation: fadeIn 0.5s; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -108,4 +108,76 @@
     justify-content: center;
     font-size: 2rem;
     cursor: pointer;
+}
+
+/* --- Quiz Game Styles --- */
+.quiz-option {
+    background: var(--white);
+    border: 2px solid var(--bg);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    font-weight: 600;
+}
+.quiz-option:active {
+    background: var(--secondary);
+    color: white;
+    transform: scale(0.98);
+}
+.quiz-question {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* --- Maze Game (Төөрдөг байшин) --- */
+#maze-container {
+    display: grid;
+    margin: 0 auto;
+    background: #eee;
+    border: 2px solid var(--primary);
+}
+.maze-cell {
+    width: 25px;
+    height: 25px;
+    background: white;
+}
+.maze-wall { background: var(--primary); }
+.maze-player { background: var(--secondary); border-radius: 50%; position: relative; }
+.maze-player::after { content: '❤️'; font-size: 10px; display: flex; justify-content: center; }
+.maze-end { background: #ffdada; display: flex; align-items: center; justify-content: center; }
+
+/* --- Word Keyboard Fix --- */
+#word-kb {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    margin-top: 15px;
+}
+.kb-btn {
+    padding: 8px 2px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--secondary);
+    background: white;
+    font-weight: bold;
+}
+
+.claw-item {
+    position: absolute;
+    font-size: 1.8rem;
+    bottom: 0;
+    transition: 0.5s;
+}
+
+#claw-arm {
+    z-index: 10;
+}
+
+#claw-hand {
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
 }
