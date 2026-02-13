@@ -97,3 +97,114 @@ function initClicker() {
         const heart = document.createElement('div');
         heart.innerHTML = "❤️";
         heart.style.cssText = `position:absolute; left:${
+
+// 1. initGameLogic дотор нэмэх хэсэг:
+// if (id === 'quiz') initQuiz();
+
+// 2. Quiz-ийн үндсэн логик
+const quizData = [
+    { q: "Хайрын бэлгэдэл цэцэг юу вэ?", a: ["Сарнай", "Лили", "Алтанзул"], c: 0 },
+    { q: "Валентины өдөр хэзээ болдог вэ?", a: ["2-р сарын 13", "2-р сарын 14", "3-р сарын 8"], c: 1 },
+    { q: "Хамгийн романтик жимс?", a: ["Алим", "Гүзээлзгэнэ", "Банана"], c: 1 }
+];
+
+let currentQ = 0;
+
+function initQuiz() {
+    currentQ = 0;
+    showQuestion();
+}
+
+function showQuestion() {
+    const area = document.getElementById('quiz-area');
+    const data = quizData[currentQ];
+    
+    let html = `<div class="quiz-question">${data.q}</div>`;
+    data.a.forEach((ans, idx) => {
+        html += `<div class="quiz-option" onclick="checkQuiz(${idx})">${ans}</div>`;
+    });
+    
+    area.innerHTML = html;
+}
+
+function checkQuiz(idx) {
+    if (idx === quizData[currentQ].c) {
+        currentQ++;
+        if (currentQ < quizData.length) {
+            showQuestion();
+        } else {
+            showModal("Баяр хүргэе!", "Та бүх асуултанд зөв хариуллаа! ❤️");
+        }
+    } else {
+        alert("Буруу байна, дахин оролдоорой! 💔");
+    }
+}
+
+// initGameLogic функц дотор if (id === 'claw') initClaw(); нэмээрэй
+
+let clawScore = 0;
+let isClawing = false;
+let armPos = 50; // хувиар
+let moveDir = 1;
+
+function initClaw() {
+    clawScore = 0;
+    document.getElementById('claw-score').innerText = "0";
+    const area = document.getElementById('claw-items-area');
+    area.innerHTML = "";
+    
+    // Найзуудыг (item) үүсгэх
+    const friends = ['🧸', '🐶', '🐱', '🐰', '🐼', '🦊'];
+    for(let i=0; i<6; i++) {
+        const item = document.createElement('div');
+        item.className = 'claw-item';
+        item.innerText = friends[i];
+        item.style.left = (i * 15 + 10) + "%";
+        area.appendChild(item);
+    }
+
+    // Гар хөдлөх хөдөлгөөн
+    const clawInterval = setInterval(() => {
+        if (!document.getElementById('game-claw').classList.contains('active')) {
+            clearInterval(clawInterval);
+            return;
+        }
+        if (!isClawing) {
+            armPos += (2 * moveDir);
+            if (armPos > 85 || armPos < 10) moveDir *= -1;
+            document.getElementById('claw-arm').style.left = armPos + "%";
+        }
+    }, 50);
+}
+
+function dropClaw() {
+    if (isClawing) return;
+    isClawing = true;
+    const arm = document.getElementById('claw-arm');
+    const hand = document.getElementById('claw-hand');
+    
+    // Доошоо буух
+    arm.style.height = "180px";
+    
+    setTimeout(() => {
+        // Барих оролдлого
+        const items = document.querySelectorAll('.claw-item');
+        items.forEach(item => {
+            const itemPos = parseInt(item.style.left);
+            if (Math.abs(itemPos - armPos) < 10) {
+                item.style.bottom = "150px"; // Дээшээ татах
+                item.style.transition = "bottom 0.5s ease-in-out";
+                setTimeout(() => {
+                    item.remove();
+                    clawScore++;
+                    document.getElementById('claw-score').innerText = clawScore;
+                    if(clawScore === 6) showModal("Мундаг!", "Та бүх найзуудыг барилаа!");
+                }, 500);
+            }
+        });
+
+        // Дээшээ буцах
+        arm.style.height = "30px";
+        setTimeout(() => { isClawing = false; }, 500);
+    }, 500);
+}
